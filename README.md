@@ -1,1 +1,1 @@
-# HackRice 14
+# HackRice 14 Project
