@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Classroom Broadcast</title>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <span class="h1">Live Classroom Broadcast</span>
+        <div class="video">
+          <video id="videoElement" autoplay playsinline></video>
+          <canvas id="canvasElement" style="display: none"></canvas>
+        </div>
+        <div class="columns">
+          <button class="btn btn-action btn-primary s-circle">
+            <ion-icon name="mic-off"></ion-icon>
+          </button>
+          <button class="btn btn-action btn-primary s-circle" id="videoToggle">
+            <ion-icon name="videocam"></ion-icon>
+          </button>
+          <button class="btn btn-action btn-red s-circle">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
