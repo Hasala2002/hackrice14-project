@@ -5,6 +5,19 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const path = require("path");
 const bodyParser = require("body-parser");
+const axios = require("axios");
+
+const OpenAIApi = require("openai");
+
+const TOKEN =
+  "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";
+
+// const configuration = new Configuration({
+//   apiKey: TOKEN, // Replace with your OpenAI API key
+// });
+const openai = new OpenAIApi({
+  apiKey: TOKEN, // Replace with your OpenAI API key
+});
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
@@ -102,6 +115,30 @@ client.connect().then(() => {
   app.get("/", (req, res) => {
     run().catch(console.dir);
   });
+});
+
+app.post("/chatbot", async (req, res) => {
+  try {
+    // const response = await openai.createChatCompletion({
+    //   model: "gpt-3.5-turbo", // Specify the model you want to use
+    //   messages: [{ role: "user", content: req.body.query }],
+    // });
+
+    // const answer = response.data.choices[0].message.content;
+    // console.log("Answer from ChatGPT:", answer);
+
+    const chatCompletion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: req.body.query }],
+      model: "gpt-3.5-turbo",
+    });
+
+    // console.log(chatCompletion);
+    res.json(chatCompletion.choices);
+    console.log(chatCompletion.choices);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    // console.error("Error fetching data from OpenAI:", error);
+  }
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,10 +1,20 @@
 import { Avatar, Button, Card, Container, Group, Text } from "@mantine/core";
 import { useAuth } from "../utilities/Auth.Context";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  addResponseMessage,
+  toggleMsgLoader,
+  Widget,
+} from "@ryaneewx/react-chat-widget";
+
+import "@ryaneewx/react-chat-widget/lib/styles.css";
 
 const Home = () => {
   const { user, logout } = useAuth();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const TOKEN = "AQDAf4Gh1gY.kWuDMjuHvq6NehdDa1UKuf1NoftC4zULW7clygVORwk";
 
   const testFunc = async (studentData) => {
     try {
@@ -33,12 +43,40 @@ const Home = () => {
   };
 
   useEffect(() => {
-    testFunc({
-      id: user.sub,
-      name: user.name,
-      email: user.email,
-    });
+    // testFunc({
+    //   id: user.sub,
+    //   name: user.name,
+    //   email: user.email,
+    // });
   }, []);
+
+  const fetchData = async (query) => {
+    try {
+      const response = await fetch("http://localhost:3000/chatbot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      const result = await response.json();
+      addResponseMessage(result[0].message.content);
+      toggleMsgLoader();
+      // setData(result);
+    } catch (error) {
+      setError(error.message);
+      toggleMsgLoader();
+    }
+  };
+
+  const handleNewUserMessage = (newMessage) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // addResponseMessage("hello there");
+    toggleMsgLoader();
+    fetchData(newMessage);
+    // Now send the message throught the backend API
+  };
 
   return (
     <Container
@@ -85,6 +123,11 @@ const Home = () => {
           </Button>
         </Group>
       </Card>
+      <Widget
+        title="Catalyst Mentor"
+        subtitle="Let me help you with your work!"
+        handleNewUserMessage={handleNewUserMessage}
+      />
     </Container>
   );
 };

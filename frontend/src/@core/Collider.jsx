@@ -40,6 +40,7 @@ export default function Collider({ isTrigger = false }) {
             return true;
         },
         onCollision(ref) {
+            console.log(`Collision detected`); 
             publish('collision', ref);
         },
         onTrigger(ref) {
