@@ -1,6 +1,6 @@
 import css from '@emotion/css';
 
-export default function globalStyles() {
+function globalStyles() {
     return css`
         :root {
             user-select: none;
@@ -23,3 +23,5 @@ export default function globalStyles() {
         }
     `;
 }
+
+export default globalStyles;

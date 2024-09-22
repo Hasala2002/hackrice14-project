@@ -1,19 +1,19 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { HTML } from 'drei';
+import { Html } from '@react-three/drei'; // Corrected import
 import React from 'react';
 import { AssetLoaderProvider } from './AssetLoader';
 import { GameContext } from './Game';
 import useGame from './useGame';
 
 export default function GameUi({ children }) {
-    const gameContextValue = useGame(); // forwarded to dom reconciler
+    const gameContextValue = useGame(); // Forwarded to DOM reconciler
 
     return (
-        <HTML eps={1} zIndexRange={[0, 0]}>
+        <Html eps={1} zIndexRange={[0, 0]}> {/* Corrected from HTML to Html */}
             <GameContext.Provider value={gameContextValue}>
                 <AssetLoaderProvider>{children}</AssetLoaderProvider>
             </GameContext.Provider>
-        </HTML>
+        </Html>
     );
 }

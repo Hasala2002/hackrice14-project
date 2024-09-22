@@ -3,10 +3,10 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-three-fiber';
-import Graphic from '../@core/Graphic';
-import useGameObject from '../@core/useGameObject';
-import usePathfinding from '../@core/usePathfinding';
-import spriteData from '../spriteData';
+import Graphic from '../../@core/Graphic';
+import useGameObject from '../../@core/useGameObject';
+import usePathfinding from '../../@core/usePathfinding';
+import spriteData from '../../spriteData';
 
 const offsetZ = 1.5;
 
