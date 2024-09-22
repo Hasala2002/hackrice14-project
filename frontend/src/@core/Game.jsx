@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unknown-property */
 import { css } from "@emotion/react";
 import React, { useEffect, useMemo, useState } from "react";
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 import createPubSub from "./utils/createPubSub";
 
 export const GameContext = React.createContext(null);
@@ -116,8 +116,20 @@ export default function Game({
   };
 
   return (
-    <div css={styles.root}>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "grid",
+        placeItems: "center",
+        backgroundColor: "#989489",
+      }}
+    >
       <Canvas
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
         camera={{
           position: [0, 0, 32],
           zoom: cameraZoom,

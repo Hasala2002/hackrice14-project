@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-three-fiber";
+import { createPortal } from "@react-three/fiber";
 import Graphic from "../../@core/Graphic";
 import useGameObject from "../../@core/useGameObject";
 import usePathfinding from "../../@core/usePathfinding";

@@ -35,7 +35,15 @@ function Classroom() {
   return (
     <>
       <Global styles={globalStyles} />
-      <div css={styles.root(width, height)}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "grid",
+          placeItems: "center",
+          backgroundColor: "#989489",
+        }}
+      >
         <Game cameraZoom={80}>
           <AssetLoader urls={urls} placeholder="Loading assets ...">
             <SceneManager defaultScene="office">

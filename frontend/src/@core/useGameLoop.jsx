@@ -1,24 +1,24 @@
-import { useRef } from 'react';
-import { useFrame } from 'react-three-fiber';
-import useGame from './useGame';
-import useGameObject from './useGameObject';
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import useGame from "./useGame";
+import useGameObject from "./useGameObject";
 
 export default function useGameLoop(callback, condition = true) {
-    const { paused } = useGame();
-    const { getRef } = useGameObject() || {}; // optional
-    const active = useRef(false);
-    const callbackRef = useRef();
-    callbackRef.current = callback;
-    active.current = !paused && condition;
-    if (getRef && getRef().disabled) active.current = false;
+  const { paused } = useGame();
+  const { getRef } = useGameObject() || {}; // optional
+  const active = useRef(false);
+  const callbackRef = useRef();
+  callbackRef.current = callback;
+  active.current = !paused && condition;
+  if (getRef && getRef().disabled) active.current = false;
 
-    useFrame(({ clock }) => {
-        const time = clock.oldTime; // clock.elapsedTime / 1000;
+  useFrame(({ clock }) => {
+    const time = clock.oldTime; // clock.elapsedTime / 1000;
 
-        if (active.current) {
-            callback(time);
-        }
-    });
+    if (active.current) {
+      callback(time);
+    }
+  });
 
-    return active.current;
+  return active.current;
 }
