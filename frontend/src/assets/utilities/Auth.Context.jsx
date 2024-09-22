@@ -1,33 +1,34 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { createContext, useContext, useEffect } from 'react'
+import { useAuth0 } from "@auth0/auth0-react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
-export const useAuth = () =>{
-    return useContext(AuthContext)
-} 
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout } =
+    useAuth0();
 
-    const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
+  const [collided, setCollided] = useState(false);
+  const [collidedAssign, setCollidedAssign] = useState(false);
 
-    useEffect(()=>{
-        console.log(user, isAuthenticated)
-    },[user, isAuthenticated])
+  useEffect(() => {
+    console.log(user, isAuthenticated);
+  }, [user, isAuthenticated]);
 
-    const value = {
-        user,
-        isAuthenticated,
-        isLoading,
-        loginWithRedirect,
-        logout
-    } 
+  const value = {
+    user,
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    logout,
+    collided,
+    setCollided,
+    collidedAssign,
+    setCollidedAssign,
+  };
 
-    return (
-        <AuthContext.Provider value={value}>
-            {children}
-        </AuthContext.Provider>
-    )
-
-
-}
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

@@ -10,7 +10,10 @@ const AppRoutes = () => {
     <Routes>
       <Route path={"/"} element={<SecureRoute element={<Home />} />} />
       <Route path={"/login"} element={<Login />} />
-      <Route path={"/classroom"} element={<Classroom />} />
+      <Route
+        path={"/classroom"}
+        element={<SecureRoute element={<Classroom />} />}
+      />
       <Route path={"/live"} element={<LiveClass />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
